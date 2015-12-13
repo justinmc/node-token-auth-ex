@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var passportLocalMongoose = require('passport-local-mongoose');
 var validator = require('validator');
 
-var PRIVATE_FIELDS = [
+const PRIVATE_FIELDS = [
   '_id',
   'salt',
   'hash',

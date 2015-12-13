@@ -21,6 +21,20 @@ var Token = new Schema({
   invalidated: {
     type: Date,
   },
+
+  // The could be used to help the user identify what device a specific
+  // login came from
+  useragent: {
+    type: String,
+    required: true,
+  },
+
+  // This could be used to help the user identify where they were when they
+  // logged in with a specific device.
+  ip: {
+    type: String,
+    required: true,
+  },
 });
 
 Token.methods.isValid = function isValid() {

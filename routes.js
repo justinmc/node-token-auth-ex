@@ -15,7 +15,11 @@ router.post('/signup', function(req, res, next) {
       passport.authenticate('local')(req, res, function() {
         // The only difference is that we also create a token referencing
         // the new user here
-        Token.create({user}, function(err, token) {
+        Token.create({
+          user,
+          useragent: req.headers['user-agent'],
+          ip: req.connection.remoteAddress,
+        }, function(err, token) {
           if (err) {
             return next(err);
           } else {
@@ -36,7 +40,11 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
   // Logging in creates another new token as well.
   // Would you want to invalidate all other tokens for this user here too?
   // Not if you want to allow multiple devices per user at the same time.
-  Token.create({user: req.user}, function(err, token) {
+  Token.create({
+    user: req.user,
+    useragent: req.headers['user-agent'],
+    ip: req.connection.remoteAddress,
+  }, function(err, token) {
     if (err) {
       return next(err);
     } else {

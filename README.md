@@ -2,6 +2,10 @@
 
 This project is a simple example of using token based authentication in a robust way.
 
+## Run it
+    mongod
+    npm start
+
 ## Try it out!
 
 ### Sign Up
@@ -11,4 +15,4 @@ This project is a simple example of using token based authentication in a robust
     curl http://localhost:3000/v1/login -X POST --data 'email=user@example.com&password=ilovecode'
 
 ### Access a protected endpoint
-   curl http://localhost:3000/v1/protected\?access_token=...
+    curl http://localhost:3000/v1/protected\?access_token=...

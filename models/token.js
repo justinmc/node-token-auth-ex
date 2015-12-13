@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = mongoose.Schema.Types.ObjectId;
 var User = require('./user');
+var appConstants = require('../constants/app_constants');
 
 var Token = new Schema({
   user: {
@@ -21,5 +22,19 @@ var Token = new Schema({
     type: Date,
   },
 });
+
+Token.methods.isValid = function isValid() {
+  // Has the token been marked as invalid
+  if (this.invalidated) {
+    return false;
+  }
+
+  // Is the token expired
+  if (Date.now() - this.created > appConstants.tokenLifespan) {
+    return false;
+  }
+
+  return true;
+};
 
 module.exports = mongoose.model('Token', Token);

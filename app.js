@@ -41,7 +41,7 @@ passport.use(new BearerStrategy(function(token, done) {
       return done(err);
     }
 
-    if (Date.now() - token.created > appConstants.tokenLifespan) {
+    if (!token.isValid()) {
       return done(null, false);
     }
 

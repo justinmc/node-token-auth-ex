@@ -1,0 +1,23 @@
+{
+  "name": "node-token-auth-ex",
+  "version": "1.0.0",
+  "author": "Justin McCandless",
+  "scripts": {
+    "start": "node --harmony ./bin/www",
+    "dev": "nodemon --harmony ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.12.0",
+    "debug": "~2.1.1",
+    "dotenv": "^1.2.0",
+    "express": "~4.12.2",
+    "jwt-simple": "^0.4.0",
+    "mongoose": "^4.2.10",
+    "morgan": "~1.5.1",
+    "passport": "^0.3.2",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^3.1.0",
+    "validator": "^4.4.0"
+  }
+}

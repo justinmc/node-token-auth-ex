@@ -35,6 +35,11 @@ var Token = new Schema({
     type: String,
     required: true,
   },
+
+  // Keep track of the last time the user authenticated with this token
+  lastUsed: {
+    type: Date,
+  }
 });
 
 Token.methods.isValid = function isValid() {

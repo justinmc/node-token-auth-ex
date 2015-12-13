@@ -61,8 +61,16 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
 // This requires a valid access_token to be passed with the request.
 // See our implementation of the bearer strategy in app.js.
 router.get('/protected', passport.authenticate('bearer', {session: false}), function(req, res, next) {
-  return res.send({
-    message: 'you must be successfully authenticated if you received this'
+  Token.update({
+    lastUsed: Date.now(),
+  }, function(err, token) {
+    if (err) {
+      next(err);
+    }
+
+    return res.send({
+      message: 'you must be successfully authenticated if you received this'
+    });
   });
 });
 

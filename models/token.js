@@ -14,7 +14,7 @@ var Token = new Schema({
   // This allows us to expire the token after a certain amount of time
   created: {
     type: Date,
-    default: Date.now(),
+    default: Date.now,
   },
 
   // This might allow us to let the user logout

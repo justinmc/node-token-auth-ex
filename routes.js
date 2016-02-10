@@ -57,15 +57,33 @@ router.post('/login', passport.authenticate('local'), function(req, res, next) {
   });
 });
 
+router.get('/logout', passport.authenticate('bearer', {session: false}), function(req, res, next) {
+  var token = req.authInfo.token;
+
+  // Set invalidated on token
+  token.update({
+    invalidated: Date.now(),
+  }, function(err, token) {
+    if (err) {
+      return next(err);
+    }
+
+    return res.send({
+      message: 'Successfully logged out'
+    });
+  });
+});
+
 // Note that we're not using the 'local' strategy here, we're using 'bearer'.
 // This requires a valid access_token to be passed with the request.
 // See our implementation of the bearer strategy in app.js.
 router.get('/protected', passport.authenticate('bearer', {session: false}), function(req, res, next) {
   Token.update({
+  }, {
     lastUsed: Date.now(),
   }, function(err, token) {
     if (err) {
-      next(err);
+      return next(err);
     }
 
     return res.send({

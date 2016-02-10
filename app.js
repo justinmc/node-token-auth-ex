@@ -52,7 +52,7 @@ passport.use(new BearerStrategy(function(token, done) {
       if (!user) {
         return done(null, false);
       }
-      return done(null, user);
+      return done(null, user, {token});
     });
   });
 }));

@@ -16,3 +16,6 @@ This project is a simple example of using token based authentication in a robust
 
 ### Access a protected endpoint
     curl http://localhost:3000/v1/protected --header "Authorization: Bearer <token>"
+
+### Logout
+    curl http://localhost:3000/v1/logout --header "Authorization: Bearer <token>"

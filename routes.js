@@ -87,7 +87,7 @@ router.get('/protected', passport.authenticate('bearer', {session: false}), func
     }
 
     return res.send({
-      message: 'you must be successfully authenticated if you received this'
+      message: 'Successfully accessed protected endpoint'
     });
   });
 });

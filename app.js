@@ -45,14 +45,23 @@ passport.use(new BearerStrategy(function(token, done) {
       return done(null, false);
     }
 
-    User.findById(token.user, function (err, user) {
+    token.update({
+      lastUsed: Date.now(),
+    }, function(err) {
       if (err) {
         return done(err);
       }
-      if (!user) {
-        return done(null, false);
-      }
-      return done(null, user, {token});
+
+      console.log('do it', token);
+      User.findById(token.user, function (err, user) {
+        if (err) {
+          return done(err);
+        }
+        if (!user) {
+          return done(null, false);
+        }
+        return done(null, user, {token});
+      });
     });
   });
 }));

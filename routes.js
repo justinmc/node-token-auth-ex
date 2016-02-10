@@ -63,7 +63,7 @@ router.get('/logout', passport.authenticate('bearer', {session: false}), functio
   // Set invalidated on token
   token.update({
     invalidated: Date.now(),
-  }, function(err, token) {
+  }, function(err) {
     if (err) {
       return next(err);
     }
@@ -78,17 +78,8 @@ router.get('/logout', passport.authenticate('bearer', {session: false}), functio
 // This requires a valid access_token to be passed with the request.
 // See our implementation of the bearer strategy in app.js.
 router.get('/protected', passport.authenticate('bearer', {session: false}), function(req, res, next) {
-  Token.update({
-  }, {
-    lastUsed: Date.now(),
-  }, function(err, token) {
-    if (err) {
-      return next(err);
-    }
-
-    return res.send({
-      message: 'Successfully accessed protected endpoint'
-    });
+  return res.send({
+    message: 'Successfully accessed protected endpoint'
   });
 });
 
